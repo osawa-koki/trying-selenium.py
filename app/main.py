@@ -29,11 +29,10 @@ try:
     driver.get("https://www.google.com")
     screenshot(driver)
 
-    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q")))
+    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q"))) # noqa
     q.send_keys("Python")
     screenshot(driver)
 
-    # Enterキーを押して検索を実行する
     q.send_keys(Keys.RETURN)
     WebDriverWait(driver, 10).until(EC.title_contains("Python"))
     screenshot(driver)
@@ -51,7 +50,7 @@ try:
     driver.get("https://www.google.com")
     screenshot(driver)
 
-    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q")))
+    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q"))) # noqa
     q.send_keys("askew")
     screenshot(driver)
     q.send_keys(Keys.RETURN)
@@ -61,7 +60,7 @@ try:
     driver.get("https://www.google.com")
     screenshot(driver)
 
-    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q")))
+    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q"))) # noqa
     q.send_keys("the number of horns on a unicorn")
     screenshot(driver)
     q.send_keys(Keys.RETURN)
