@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 options = Options()
 options.add_argument("--headless")
@@ -12,55 +15,60 @@ options.add_argument("--lang=en-US")
 
 driver = webdriver.Chrome(options=options)
 
-
 count = 0
 
 
 def screenshot(driver):
     global count
     count += 1
-    driver.implicitly_wait(1)
+    driver.implicitly_wait(2)
     driver.save_screenshot(f"./dist/{count}.png")
 
 
-driver.get("https://www.google.com")
-screenshot(driver)
+try:
+    driver.get("https://www.google.com")
+    screenshot(driver)
 
-q = driver.find_element(By.NAME, "q")
-q.send_keys("Python")
-screenshot(driver)
+    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q")))
+    q.send_keys("Python")
+    screenshot(driver)
 
-search = driver.find_element(By.NAME, "btnK")
-search.click()
-screenshot(driver)
+    # Enterキーを押して検索を実行する
+    q.send_keys(Keys.RETURN)
+    WebDriverWait(driver, 10).until(EC.title_contains("Python"))
+    screenshot(driver)
 
-driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-screenshot(driver)
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    screenshot(driver)
 
-next_page = driver.find_element(By.LINK_TEXT, "2")
-next_page.click()
-screenshot(driver)
+    next_page = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.LINK_TEXT, "2"))
+    )
+    next_page.click()
+    WebDriverWait(driver, 10).until(EC.title_contains("Python"))
+    screenshot(driver)
 
-driver.get("https://www.google.com")
-screenshot(driver)
+    driver.get("https://www.google.com")
+    screenshot(driver)
 
-q = driver.find_element(By.NAME, "q")
-q.send_keys("askew")
-screenshot(driver)
+    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q")))
+    q.send_keys("askew")
+    screenshot(driver)
+    q.send_keys(Keys.RETURN)
+    WebDriverWait(driver, 10).until(EC.title_contains("askew"))
+    screenshot(driver)
 
-search = driver.find_element(By.NAME, "btnK")
-search.click()
-screenshot(driver)
+    driver.get("https://www.google.com")
+    screenshot(driver)
 
-driver.get("https://www.google.com")
-screenshot(driver)
+    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q")))
+    q.send_keys("the number of horns on a unicorn")
+    screenshot(driver)
+    q.send_keys(Keys.RETURN)
+    WebDriverWait(driver, 10).until(
+        EC.title_contains("the number of horns on a unicorn")
+    )
+    screenshot(driver)
 
-q = driver.find_element(By.NAME, "q")
-q.send_keys("the number of horns on a unicorn")
-screenshot(driver)
-
-search = driver.find_element(By.NAME, "btnK")
-search.click()
-screenshot(driver)
-
-driver.quit()
+finally:
+    driver.quit()
