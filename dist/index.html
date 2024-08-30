@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧗 trying-selenium.py 🧗</title>
+</head>
+<body>
+  <div id="image-box" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;"></div>
+  <script>
+    (async () => {
+      const imageBox = document.getElementById('image-box')
+      let i = 1
+      while (true) {
+        const imgSrc = `./${i}.png`
+        const image = await fetch(imgSrc)
+        if (image.status !== 200) {
+          break
+        }
+        const img = document.createElement('img')
+        img.style.border = '1px solid #000'
+        img.src = imgSrc
+        img.style.width = '500px'
+        imageBox.appendChild(img)
+        i++
+      }
+    })()
+      .then(() => console.log('done'))
+      .catch(console.error)
+  </script>
+</body>
+</html>
