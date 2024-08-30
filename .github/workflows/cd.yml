@@ -1,15 +1,26 @@
-name: run
+name: cd
 
-on:
-  workflow_dispatch:
-  push:
-    tags: [ v-* ]
+# on:
+#   workflow_dispatch:
+#   push:
+#     tags: [ v-* ]
+
+on: [ push ]
 
 env:
   python-version: 3.12
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
 jobs:
-  run:
+  build:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
@@ -27,3 +38,17 @@ jobs:
       run: chmod +x ./entrypoint.sh
     - name: Run program
       run: ./entrypoint.sh
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./dist/
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-22.04
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
