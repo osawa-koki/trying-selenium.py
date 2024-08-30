@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "trying-selenium-py"
+version = "1.0.0"
+description = "🧗🧗🧗 PythonでSeleniumを使ってみる！"
+authors = ["osawa-koki <koki@osawa.dev>"]
+license = "Apache-2.0"
+readme = "README.md"
+packages = [{include = "trying_selenium"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.0.0"
+black = "^24.4.2"
+isort = "^5.12.0"
+mypy = "^1.7.0"
+pytest = "^8.3.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
