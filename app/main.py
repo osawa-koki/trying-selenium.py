@@ -29,7 +29,9 @@ try:
     driver.get("https://www.google.com")
     screenshot(driver)
 
-    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q"))) # noqa
+    q = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.NAME, "q"))
+    )  # noqa
     q.send_keys("Python")
     screenshot(driver)
 
@@ -50,7 +52,9 @@ try:
     driver.get("https://www.google.com")
     screenshot(driver)
 
-    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q"))) # noqa
+    q = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.NAME, "q"))
+    )  # noqa
     q.send_keys("askew")
     screenshot(driver)
     q.send_keys(Keys.RETURN)
@@ -60,7 +64,9 @@ try:
     driver.get("https://www.google.com")
     screenshot(driver)
 
-    q = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "q"))) # noqa
+    q = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.NAME, "q"))
+    )  # noqa
     q.send_keys("the number of horns on a unicorn")
     screenshot(driver)
     q.send_keys(Keys.RETURN)
