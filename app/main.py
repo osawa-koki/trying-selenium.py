@@ -24,7 +24,7 @@ driver.get("https://www.google.com")
 screenshot(driver)
 
 q = driver.find_element(By.NAME, "q")
-q.send_keys("Selenium")
+q.send_keys("Japan")
 screenshot(driver)
 
 search = driver.find_element(By.NAME, "btnK")
