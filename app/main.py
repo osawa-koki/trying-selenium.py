@@ -20,6 +20,7 @@ count = 0
 def screenshot(driver):
     global count
     count += 1
+    driver.implicitly_wait(1)
     driver.save_screenshot(f"./dist/{count}.png")
 
 
@@ -29,8 +30,6 @@ screenshot(driver)
 q = driver.find_element(By.NAME, "q")
 q.send_keys("Python")
 screenshot(driver)
-
-driver.implicitly_wait(1)
 
 search = driver.find_element(By.NAME, "btnK")
 search.click()
@@ -50,8 +49,6 @@ q = driver.find_element(By.NAME, "q")
 q.send_keys("askew")
 screenshot(driver)
 
-driver.implicitly_wait(1)
-
 search = driver.find_element(By.NAME, "btnK")
 search.click()
 screenshot(driver)
@@ -62,8 +59,6 @@ screenshot(driver)
 q = driver.find_element(By.NAME, "q")
 q.send_keys("the number of horns on a unicorn")
 screenshot(driver)
-
-driver.implicitly_wait(1)
 
 search = driver.find_element(By.NAME, "btnK")
 search.click()
